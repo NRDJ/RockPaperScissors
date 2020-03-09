@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>RockPaperScissors</title>
+</head>
+<body>
+    
+</body>
+<script>
+
+function computerPlay() {
+          let computerArray = ["Rock", "Paper", "Scissor"];
+          let randomPlay = Math.floor(Math.random()*computerArray.length);
+          return computerArray[randomPlay];
+      }   
+
+      function printScore(){
+              alert("User score: " + userPoints + " Computer score: " + computerPoints);
+      }
+
+      function startNewGame (){
+        let newGame = prompt("Do you want to play again?(y/n)");
+        newGame = newGame.toLowerCase();
+        if(newGame == "y" || newGame == "yes"){  
+        computerPoints = 0;
+        userPoints = 0;      
+          gameFiveRounds();
+        }else{
+          alert(":( Shutting off application.");
+        }
+      }
+
+      function gameOver(){
+        if(userPoints > computerPoints){
+          alert("Congratulations! You won the game!");
+        }else if(userPoints < computerPoints){
+          alert("Ouch, I'm sorry. You lost the game.");
+        }else{
+          alert("It's a draw!");
+        }
+
+        startNewGame();
+      }
+
+      function gameFiveRounds() {
+        alert("Initializing. Best of five wins the game. Good luck!")
+        for (i=0; i<5; i++){
+          let computerSelection = computerPlay();
+          let playerSelection = prompt("Rock, Paper or Scissor?");
+          playerSelection = playerSelection.toLowerCase();
+          if(playerSelection == "rock" || playerSelection =="paper" || playerSelection == "scissor"){
+          playRound(playerSelection, computerSelection);
+         }else{
+           alert("Wrong input! Try again");
+           (i === i--);
+         }
+          if (computerPoints == 3 || userPoints == 3 || i==4){
+           gameOver();
+         }
+      }
+    }
+        function playRound(playerSelection, computerSelection) {
+              if(playerSelection == "rock" & computerSelection == "Rock"){
+                  alert("Draw! Rock equals rock.");
+                  printScore();
+              }else if(playerSelection == "rock" & computerSelection == "Paper"){
+                  computerPoints = computerPoints + 1;
+                  alert("You lose! Paper beats rock.");
+                  printScore(); 
+              }else if(playerSelection == "rock" & computerSelection == "Scissor"){
+                  userPoints = userPoints + 1;              
+                  alert("You win! Rock beats Scissor.");
+                  printScore();
+              }else if(playerSelection == "paper" & computerSelection == "Rock"){
+                  userPoints = userPoints + 1;
+                  alert("You win! Paper beats Rock.");
+                  printScore();
+              }else if(playerSelection == "paper" & computerSelection == "Paper"){
+                  alert("Draw! Paper equals paper");
+                  printScore();
+              }else if(playerSelection == "paper" & computerSelection == "Scissor"){
+                  computerPoints = computerPoints + 1;
+                  alert("You lose! Scissor beats paper.");
+                  printScore();
+              }else if(playerSelection == "scissor" & computerSelection == "Scissor"){
+                  alert("Draw! Scissor equals scissor.");
+                  printScore();
+              }else if(playerSelection == "scissor" & computerSelection == "Rock"){ 
+                  computerPoints = computerPoints + 1;
+                  alert("You lose! Rock beats Scissor.");
+                  printScore();
+              }else if(playerSelection == "scissor" & computerSelection == "Paper"){
+                  userPoints = userPoints + 1;
+                  alert("You win! Scissor beats paper.");
+                  printScore();         
+          }
+      }
+  
+      let computerPoints = 0;
+      let userPoints = 0;
+      gameFiveRounds();
+      
+</script>
+
+</html>
+
